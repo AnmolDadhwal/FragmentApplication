@@ -26,7 +26,6 @@ class FirstFragment : Fragment(), ActivityInterface {
     private var param1: String? = null
     private var param2: String? = null
     var btnchangefromfragment: Button?=null
-    var fragment: LinearLayout?=null
     var mainActivity: MainActivity?=null
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -118,6 +117,5 @@ class FirstFragment : Fragment(), ActivityInterface {
 
     override fun changeBtnText() {
         btnchangefromfragment?.setText("Change from activity")
-        fragment?.setBackgroundColor(ContextCompat.getColor(mainActivity!!,R.color.black))
     }
 }
