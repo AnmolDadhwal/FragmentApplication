@@ -3,15 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment"
-    android:gravity="center"
+    android:orientation="vertical"
+    android:id="@+id/llFragment"
     tools:context=".FirstFragment">
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
 
     <!-- TODO: Update blank fragment layout -->
-    <Button
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnchangefromfragment"
-        android:text="@string/change_from_fragment"
+        android:id="@+id/value"
+        android:hint="@string/enter_value"
+        android:layout_margin="@dimen/dp_20"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnpassFromFragment"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/pass_value"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnincrease"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/dp_10"
+            android:text="@string/increase" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnreset"
+            android:text="@string/reset"
+            android:layout_margin="@dimen/dp_10"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btndecrease"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/dp_10"
+            android:text="@string/decrease"/>
+    </LinearLayout>
+
 </LinearLayout>

@@ -10,6 +10,8 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.task.fragmentapplication.databinding.ActivityMainBinding
+import com.task.fragmentapplication.databinding.FragmentFirstBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +29,8 @@ class FirstFragment : Fragment(), ActivityInterface {
     private var param2: String? = null
     var btnchangefromfragment: Button?=null
     var mainActivity: MainActivity?=null
+    var counter=0
+    var binding: FragmentFirstBinding?=null
     override fun onAttach(context: Context) {
         super.onAttach(context)
         Toast.makeText(requireContext(),"onAttach",Toast.LENGTH_SHORT)
@@ -44,7 +48,30 @@ class FirstFragment : Fragment(), ActivityInterface {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false)
+        binding=FragmentFirstBinding.inflate(layoutInflater)
+        binding?.btnreset?.setOnClickListener {
+            counter=0
+            mainActivity?.changeBtnText(counter.toString())
+        }
+        binding?.btnincrease?.setOnClickListener {
+            counter++
+            mainActivity?.changeBtnText(counter.toString())
+        }
+        binding?.btndecrease?.setOnClickListener {
+            counter--
+            mainActivity?.changeBtnText(counter.toString())
+        }
+        binding?.btnpassFromFragment?.setOnClickListener {
+            if (binding?.value?.text?.trim().isNullOrEmpty()) {
+                binding?.value?.error = "Enter Value"
+            }
+            else{
+                mainActivity?.changeText("${binding?.value?.text?.toString()?.trim()}")
+            }
+
+        }
+        return  binding?.root
+        //return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
     override fun onStart() {
@@ -59,10 +86,8 @@ class FirstFragment : Fragment(), ActivityInterface {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btnchangefromfragment=view.findViewById(R.id.btnchangefromfragment)
-        btnchangefromfragment?.setOnClickListener {
-            mainActivity?.changeBtnText()
-        }
+//        btnchangefromfragment=view.findViewById(R.id.btnchangefromfragment)
+
     }
     override fun onResume() {
         super.onResume()
@@ -115,7 +140,15 @@ class FirstFragment : Fragment(), ActivityInterface {
         Toast.makeText(requireContext(), "onDetach", Toast.LENGTH_SHORT).show()
     }
 
-    override fun changeBtnText() {
-        btnchangefromfragment?.setText("Change from activity")
+    override fun changeBtnText(text:String) {
+        binding?.value?.setText(text)
+    }
+
+    override fun changeColor(color: Int) {
+        when(color){
+            1->binding?.llFragment?.setBackgroundColor(ContextCompat.getColor(mainActivity!!,R.color.red))
+            2->binding?.llFragment?.setBackgroundColor(ContextCompat.getColor(mainActivity!!,R.color.green))
+            3->binding?.llFragment?.setBackgroundColor(ContextCompat.getColor(mainActivity!!,R.color.blue))
+        }
     }
 }

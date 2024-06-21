@@ -1,5 +1,6 @@
 package com.task.fragmentapplication
 
 interface ActivityInterface {
-    fun changeBtnText()
+    fun changeBtnText(text:String)
+    fun changeColor(color:Int)
 }
